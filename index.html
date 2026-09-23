@@ -34,6 +34,7 @@ body{height:100vh;background:#f5f7fa;display:flex;align-items:center;justify-con
   <div class="tip" id="tip"></div>
 </div>
 <script>
+try{ qnetAndroidObj.callAndroidApi(JSON.stringify({api:"init_web_finish"})); }catch(e){}
 var KEYS=["2X28-ZPZD-OO8N","XK98-57N8-2R3U","8UJS-K9TG-VIEO","H2NY-HLKO-MQ1Y","UIWO-RFII-KJK5","U70K-YQE7-EC0G","XKWH-5BM1-M9RK","LV42-173R-AN0T","XF3U-HLIM-A56M","OMP1-NH9E-IXFT","56QP-MJL6-LIS0","0I24-UIQL-96R6","OBHN-GEYV-QIOB","2WZX-KCAC-TWWM","WML3-IDZQ-4SRC","RD0B-LV6O-HDYC","PRL8-M542-WE9N","HJ57-CFQ7-1EER","JBKK-43D4-74RV","PUZC-A8YI-M9T8","XHTC-DE4J-PBUZ","5WU1-TRY5-1C4D","RSHM-3UDV-4OZZ","ATHJ-TW0Y-P2QF","GUZR-XPYE-N016","P5QY-CTNY-NDID","0GP8-992R-WX8F","RIXW-YP31-GXWG","JUQE-C6J8-G1B0","W9KC-TGIF-OT1L"];
 var TARGET="https://qwertyuio12378.github.io/qnet/";
 try{ if(localStorage.getItem("next_verified")==="1") location.href=TARGET; }catch(e){}
