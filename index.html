@@ -37,7 +37,6 @@ body{height:100vh;background:#f5f7fa;display:flex;align-items:center;justify-con
 try{ qnetAndroidObj.callAndroidApi(JSON.stringify({api:"init_web_finish"})); }catch(e){}
 var KEYS=["2X28-ZPZD-OO8N","XK98-57N8-2R3U","8UJS-K9TG-VIEO","H2NY-HLKO-MQ1Y","UIWO-RFII-KJK5","U70K-YQE7-EC0G","XKWH-5BM1-M9RK","LV42-173R-AN0T","XF3U-HLIM-A56M","OMP1-NH9E-IXFT","56QP-MJL6-LIS0","0I24-UIQL-96R6","OBHN-GEYV-QIOB","2WZX-KCAC-TWWM","WML3-IDZQ-4SRC","RD0B-LV6O-HDYC","PRL8-M542-WE9N","HJ57-CFQ7-1EER","JBKK-43D4-74RV","PUZC-A8YI-M9T8","XHTC-DE4J-PBUZ","5WU1-TRY5-1C4D","RSHM-3UDV-4OZZ","ATHJ-TW0Y-P2QF","GUZR-XPYE-N016","P5QY-CTNY-NDID","0GP8-992R-WX8F","RIXW-YP31-GXWG","JUQE-C6J8-G1B0","W9KC-TGIF-OT1L"];
 var TARGET="https://qwertyuio12378.github.io/qnet/";
-try{ if(localStorage.getItem("next_verified")==="1") location.href=TARGET; }catch(e){}
 function verify(){
   var v=document.getElementById("key").value.trim().toUpperCase();
   var tip=document.getElementById("tip");
@@ -56,6 +55,23 @@ function verify(){
   },400);
 }
 document.getElementById("key").addEventListener("keydown",function(e){ if(e.key==="Enter") verify(); });
+
+/* 延迟跳转：等页面完全加载后再检查已验证状态 */
+window.addEventListener('load', function(){
+  try{
+    if(localStorage.getItem("next_verified")==="1"){
+      var tip=document.getElementById("tip");
+      var btn=document.getElementById("btn");
+      var input=document.getElementById("key");
+      tip.textContent="已验证，正在进入...";
+      tip.className="tip ok";
+      btn.disabled=true;
+      btn.textContent="进入中...";
+      input.disabled=true;
+      setTimeout(function(){ location.href=TARGET; },400);
+    }
+  }catch(e){}
+});
 </script>
 </body>
 </html>
