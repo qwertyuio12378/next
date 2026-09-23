@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NEXT 验证</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{height:100vh;background:#f5f7fa;display:flex;align-items:center;justify-content:center;font-family:-apple-system,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;padding:20px}
+.card{background:#fff;border-radius:20px;padding:32px 24px;width:100%;max-width:360px;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+.logo{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#3b82f6,#00b0f0);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700}
+.title{text-align:center;font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+.sub{text-align:center;font-size:13px;color:#999;margin-bottom:28px}
+.input-wrap{position:relative;margin-bottom:16px}
+.input-wrap input{width:100%;height:48px;border:1.5px solid #e5e7eb;border-radius:12px;padding:0 14px;font-size:15px;outline:none;letter-spacing:1px;text-transform:uppercase;background:#fafafa}
+.input-wrap input:focus{border-color:#3b82f6;background:#fff}
+.btn{width:100%;height:48px;background:#3b82f6;color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:600;cursor:pointer}
+.btn:active{opacity:.85}
+.btn:disabled{background:#b3d4fc}
+.tip{text-align:center;font-size:12px;color:#999;margin-top:16px;min-height:18px}
+.tip.err{color:#f44336}
+.tip.ok{color:#34a853}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">N</div>
+  <div class="title">NEXT 卡密验证</div>
+  <div class="sub">请输入卡密以继续使用</div>
+  <div class="input-wrap">
+    <input id="key" type="text" placeholder="XXXX-XXXX-XXXX" autocomplete="off">
+  </div>
+  <button class="btn" id="btn" onclick="verify()">立即验证</button>
+  <div class="tip" id="tip"></div>
+</div>
+<script>
+var KEYS=["2X28-ZPZD-OO8N","XK98-57N8-2R3U","8UJS-K9TG-VIEO","H2NY-HLKO-MQ1Y","UIWO-RFII-KJK5","U70K-YQE7-EC0G","XKWH-5BM1-M9RK","LV42-173R-AN0T","XF3U-HLIM-A56M","OMP1-NH9E-IXFT","56QP-MJL6-LIS0","0I24-UIQL-96R6","OBHN-GEYV-QIOB","2WZX-KCAC-TWWM","WML3-IDZQ-4SRC","RD0B-LV6O-HDYC","PRL8-M542-WE9N","HJ57-CFQ7-1EER","JBKK-43D4-74RV","PUZC-A8YI-M9T8","XHTC-DE4J-PBUZ","5WU1-TRY5-1C4D","RSHM-3UDV-4OZZ","ATHJ-TW0Y-P2QF","GUZR-XPYE-N016","P5QY-CTNY-NDID","0GP8-992R-WX8F","RIXW-YP31-GXWG","JUQE-C6J8-G1B0","W9KC-TGIF-OT1L"];
+var TARGET="https://qwertyuio12378.github.io/qnet/";
+try{ if(localStorage.getItem("next_verified")==="1") location.href=TARGET; }catch(e){}
+function verify(){
+  var v=document.getElementById("key").value.trim().toUpperCase();
+  var tip=document.getElementById("tip");
+  var btn=document.getElementById("btn");
+  if(!v){ tip.textContent="请输入卡密"; tip.className="tip err"; return; }
+  btn.disabled=true; btn.textContent="验证中...";
+  setTimeout(function(){
+    if(KEYS.indexOf(v)>=0){
+      tip.textContent="验证通过，正在进入..."; tip.className="tip ok";
+      try{ localStorage.setItem("next_verified","1"); }catch(e){}
+      setTimeout(function(){ location.href=TARGET; },600);
+    }else{
+      tip.textContent="卡密无效，请检查后重试"; tip.className="tip err";
+      btn.disabled=false; btn.textContent="立即验证";
+    }
+  },400);
+}
+document.getElementById("key").addEventListener("keydown",function(e){ if(e.key==="Enter") verify(); });
+</script>
+</body>
+</html>
