@@ -159,6 +159,21 @@
             font-weight: 600;
         }
     </style>
+<script>
+// 尽早通知原生web加载完成，关闭loading
+(function(){
+  function notify(){
+    try{
+      if(window.qnetAndroidObj){
+        qnetAndroidObj.callAndroidApi(JSON.stringify({api:"init_web_finish"}));
+      }else{
+        setTimeout(notify,100);
+      }
+    }catch(e){ setTimeout(notify,500); }
+  }
+  notify();
+})();
+</script>
 </head>
 
 <body>
