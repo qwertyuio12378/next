@@ -180,14 +180,14 @@ window.addEventListener('DOMContentLoaded', function(){
       var key=(input&&input.value||'').trim();
       if(key===BUILTIN){
         try{localStorage.setItem('next_verified','1');}catch(e){}
-        location.href=TARGET;
+        location.href=TARGET+'&login=vip';
       }
     });
   }
   if(btn2){
     btn2.addEventListener('click', function(e){
       e.stopPropagation();
-      location.href=TARGET;
+      location.href=TARGET+'&login=charity';
     });
   }
 });
